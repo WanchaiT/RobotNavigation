@@ -35,6 +35,9 @@ def a_star(start ,goal):
     return False
 
 def heuristic_cost_estimate(start ,goal):  #game sri
+    w = 1.0  # weight of heuristic
+    d = w * math.sqrt((start.x - goal.x)**2 + (start.y - goal.y)**2)
+    return d
 
 def lowest_f(f_score_node):  #jo
 
