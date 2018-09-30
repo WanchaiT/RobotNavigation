@@ -1,6 +1,6 @@
 def a_star(start ,goal): #start = {post_x ,post_y}       goal = {post_x , post_y}
     closed_set = set()
-    open_set = set([start]) #ex [ [{'x' : post_x ,'y' : post_y}] ]
+    open_set = set([start]) #ex [ [post_x ,post_y}] ]
     came_from = {}
 
     '''g_score = [ {str(start[x])) + str(start[y])) : 0 } ]  #ex [ {'15' : 0} ]
