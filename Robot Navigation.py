@@ -7,29 +7,32 @@ def a_star(start ,goal): #start = {post_x ,post_y}       goal = {post_x , post_y
     h_score = {}
     f_score = {}
 
-    '''g_score = [ {str(start[x])) + str(start[y])) : 0 } ]  #ex [ {'15' : 0} ]
-    h_score = [ {str(start[x])) + str(start[y])) : heuristic_cost_estimate(start, goal)} ]
-    f_score = [ {str(start[x])) + str(start[y])) : g_score(str(start[x])) + str(start[y]))) +
-                                                h_score(str(start[x])) + str(start[y])))} ]
-                                                '''
-    g_score[start] = 0  #ex [ {'15' : 0} ]
+    g_score[start] = 0  #ex [ {(0 ,0) : 0} ]   dist start to pos
     h_score[start] = heuristic_cost_estimate(start, goal)
-    f_score[start] = g_score[start] + h_score[start]
+    f_score[start] = g_score[start] + h_score[start] #dist pos to goal
 
     while( len(open_set) > 0 ):
         curr_node = set()
         curr_f_score = 0
 
+        '''print("came_from ",came_from)
+        print("open_set " ,open_set)
+        print("f_score " ,f_score)'''
         for pos in open_set:
+            print("positon = ",pos ,": f_score = " ,f_score[pos])
             if (curr_node == set() or f_score[pos] < curr_f_score):
                 curr_f_score = f_score[pos]
                 curr_node = pos
 
+        print("\nmin f_score = ",curr_node ,": f_score = ",f_score[curr_node])
+
         #lowest_f(f_score[start])   guideline https://rosettacode.org/wiki/A*_search_algorithm#Python
         if(curr_node == goal):
+            print("GOAL!!")
             #return reconstruct_path(came_from ,came_from[goal])
             path = [curr_node]
             while( curr_node in came_from):
+                print("curr_node = ",curr_node,": came_from ", came_from[curr_node])
                 curr_node = came_from[curr_node]
                 path.append(curr_node)
             path.reverse()
@@ -42,13 +45,13 @@ def a_star(start ,goal): #start = {post_x ,post_y}       goal = {post_x , post_y
 
         for next_node in neighbor_nodes_list : # next_node = [ {... } ]
             '''
-                      (x,y+1)
-                        |
-                        |
+          (x-1,y+1)  (x,y+1)  (x+1,y+1)
+                  \     |    /
+                    \   |  /
            (x-1,y) -- (x,y) -- (x+1,y)
-                        |
-                        |
-                     (x,y-1)
+                    /   |  \
+                  /     |    \
+          (x-1,y-1)  (x,y-1)   (x+1,y-1)
             '''
 
             if(next_node in closed_set):
@@ -100,16 +103,11 @@ def neighbor_nodes(pos,start,goal): # game wan
         n.append((x2, y2))
     return n
 
-def reconstruct_path(came_from ,curr_node):
-    if(type(came_from[curr_node]) is set):
-        path = reconstruct_path(came_from ,came_from[curr_node])
-        return (p + curr_node)
-    else:
-        return curr_node
-
 start = (int(input("start_x = ")) ,int(input("start_y = ")))
 goal = (int(input("goal_x = ")) ,int(input("goal_y = ")))
 
 path ,cost = a_star(start ,goal)
 print("path " ,path )
 print("cost ",cost)
+
+#https://rosettacode.org/wiki/A*_search_algorithm#Python
