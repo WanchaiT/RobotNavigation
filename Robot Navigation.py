@@ -79,7 +79,6 @@ def dist_between(next_node ,barriers):
     for barrier in barriers :
         if(next_node in barrier):   #ถ้า next_node ชน barrier จะreturn ค่ามากๆ
             return 1000
-    #dist = abs(curr_node[0] - next_node[0]) + abs(curr_node[1] - next_node[1])
     return 1 #ถ้าไม่ชน จะreturn1
 
 def neighbor_nodes(pos):
