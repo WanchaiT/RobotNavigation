@@ -16,7 +16,7 @@ def a_star(start ,goal ,barriers): # function a_star
         curr_f_score = 0 #ค่า f_score node ปัจจุบัน
 
         for pos in open_set: #เอา node ที่ยังไม่ได้พิจารณา จาก open_set
-            print("positon = ",pos ,": f_score = " ,f_score[pos])#พิมพ์ ตำแหน่ง และ f_score
+            print("position = ",pos ,": f_score = " ,f_score[pos])#พิมพ์ ตำแหน่ง และ f_score
             if (curr_node == set() or f_score[pos] < curr_f_score):#ถ้า node ปัจจุบันว่าง หรือ มีf_score ตำแน่งอื่นน้องกว่า f_scoreปัจจุบัน
                 curr_f_score = f_score[pos]#เปลี่ยนค่า f_score
                 curr_node = pos #เปลี่ยนnode ปัจจุบัน ให้เป็นnodeที่มี f_score น้อยกว่า
